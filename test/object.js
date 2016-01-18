@@ -67,6 +67,17 @@ describe("test object api", function () {
         });
       }, TypeError);
       assert.equal(o.a, 1);
+      // configurable is true
+      const c = {};
+      Object.defineProperty(c, 'a', {
+        configurable: true,
+        value: 2
+      });
+      assert.equal(c.a, 2);
+      Object.defineProperty(c, 'a', {
+        get: () => 3
+      });
+      assert.equal(c.a, 3);
     });
     it("get", function () {
       const o = { x: 2 };
