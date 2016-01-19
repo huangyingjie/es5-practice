@@ -102,4 +102,24 @@ describe("test object api", function () {
       assert.equal(5, o.a);
     });
   });
+  describe("defineProperties", function () {
+    const o = {};
+    Object.defineProperties(o, {
+      a: {
+        writable: false,
+        value: 2
+      },
+      b: {
+        writable: true,
+        value: 3
+      }
+    });
+    assert.throw(function () {
+      o.a = 3;
+    }, TypeError);
+    assert.equal(o.a, 2);
+    assert.equal(o.b, 3);
+    o.b = 4;
+    assert.equal(o.b, 4);
+  });
 });
